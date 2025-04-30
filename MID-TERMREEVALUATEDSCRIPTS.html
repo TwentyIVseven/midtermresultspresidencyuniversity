@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('download.jpg'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <h1>MID-TERM REEVALUATED RESULTS</h1>
+        <form id="loginForm">
+            <input type="text" id="rollNumber" placeholder="Roll Number" required>
+            <input type="date" id="dob" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <audio id="backgroundAudio" loop>
+        <embed src="audio.mp3" type="audio/mpeg"> <!-- Replace with your audio file -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Validate input
+            const rollNumber = document.getElementById('rollNumber').value;
+            const dob = document.getElementById('dob').value;
+
+            const rollNumberPattern = /^[a-zA-Z0-9]+$/; // Alphanumeric
+
+            if (!rollNumberPattern.test(rollNumber) || !dob) {
+                alert('Please enter a valid roll number and select a date of birth.');
+                return;
+            }
+
+            // Play audio
+            const audio = document.getElementById('backgroundAudio');
+            audio.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+
+            // Redirect to new interface
+            document.body.innerHTML = `
+                <div style="text-align: center;">
+                    <h1>Welcome to the New Interface</h1>
+                    <img src="download.jpg" alt="New Image" style="width: 100%; height: auto;">
+                    <audio id="backgroundAudio" loop autoplay>
+                        <source src="audio.mp3" type="audio/mpeg"> <!-- Replace with your audio file -->
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
